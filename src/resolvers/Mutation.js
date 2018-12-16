@@ -6,6 +6,7 @@ const Mutations = {
   async createExpense(parent, args, ctx, info) {
     // TODO: Check if they are logged in
     const userId = getUserId(ctx);
+    console.log(userId);
     if (!userId) {
       throw new Error('You should be logged in!');
     }
@@ -120,7 +121,6 @@ const Mutations = {
   async signin(parent, { email, password }, ctx, info) {
     const user = await ctx.db.query.user({ where: { email } });
 
-    console.log(user);
     if (!user) {
       return {
         error: {
