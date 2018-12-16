@@ -6,7 +6,6 @@ const Mutations = {
   async createExpense(parent, args, ctx, info) {
     // TODO: Check if they are logged in
     const userId = getUserId(ctx);
-    console.log(userId);
     if (!userId) {
       throw new Error('You should be logged in!');
     }
@@ -17,7 +16,7 @@ const Mutations = {
           //add relationship
           user: {
             connect: {
-              id: ctx.request.userId
+              id: userId
             }
           },
           ...args,
