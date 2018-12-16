@@ -1,0 +1,48 @@
+# import * from './generated/prisma.graphql'
+
+type SuccessMessage {
+  message: String
+}
+
+type Mutation {
+  createExpense(name: String, price: Int): Expense!
+  updateExpense(id: ID!, name: String, price: Int): Expense!
+  deleteExpense(id: ID!): Expense
+  createTodo(name: String): Todo!
+  updateTodo(id: ID!, name: String): Todo!
+  deleteTodo(id: ID!): Todo
+  signup(email: String!, password: String!, name: String!): AuthPayload!
+  signin(email: String!, password: String!): LoginResponse!
+  signout: SuccessMessage
+}
+
+type Query {
+  expenses(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense]!
+  expense(where: ExpenseWhereUniqueInput!): Expense
+  todos(where: TodoWhereInput, orderBy: TodoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Todo]!
+  todo(where: TodoWhereUniqueInput!): Todo
+  me: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  expenses: [Expense!]!
+  todos: [Todo!]!
+}
+
+type Error {
+  field: String!
+  msg: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type LoginResponse {
+  payload: AuthPayload
+  error: Error
+}

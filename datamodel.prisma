@@ -1,0 +1,21 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  expenses: [Expense!]!
+  todos: [Todo!]!
+}
+
+type Expense {
+  id: ID! @unique
+  name: String!
+  price: Int!
+  user: User!
+}
+
+type Todo {
+  id: ID! @unique
+  name: String!
+  user: User!
+}
